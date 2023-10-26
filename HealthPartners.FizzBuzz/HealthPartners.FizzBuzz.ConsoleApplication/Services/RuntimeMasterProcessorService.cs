@@ -12,14 +12,7 @@ namespace HealthPartners.FizzBuzz.ConsoleApplication.Services
             var pathToProjectSrcFolder = Environment.CurrentDirectory.Substring(0, Environment.CurrentDirectory.IndexOf(projectName) + projectName.Length);
 
             var processedValues = new List<string>();
-
-            var availableProcessors = Assembly
-                        .Load(File.ReadAllBytes(pathToProjectSrcFolder + pathToDomainDllFilesFromSrcFolder))
-                        .GetTypes()
-                        .Where(type => type.Name.Contains("Processor") && type.IsClass)
-                        .Select(type => Activator.CreateInstance(type, null)!)
-                        .OrderBy(instance => instance.GetType().GetProperty("OrderConfig")!.GetValue(instance))
-                        .AsEnumerable();
+            IEnumerable<object> availableProcessors = DetectProcessors(pathToDomainDllFilesFromSrcFolder, pathToProjectSrcFolder);
 
             foreach (var number in numbers)
             {
@@ -49,6 +42,17 @@ namespace HealthPartners.FizzBuzz.ConsoleApplication.Services
             }
 
             return processedValues;
+        }
+
+        private static IEnumerable<object> DetectProcessors(string pathToDomainDllFilesFromSrcFolder, string pathToProjectSrcFolder)
+        {
+            return Assembly
+                        .Load(File.ReadAllBytes(pathToProjectSrcFolder + pathToDomainDllFilesFromSrcFolder))
+                        .GetTypes()
+                        .Where(type => type.Name.Contains("Processor") && type.IsClass)
+                        .Select(type => Activator.CreateInstance(type, null)!)
+                        .OrderBy(instance => instance.GetType().GetProperty("OrderConfig")!.GetValue(instance))
+                        .AsEnumerable();
         }
     }
 }
