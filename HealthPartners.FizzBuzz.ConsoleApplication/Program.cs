@@ -2,7 +2,7 @@
 
 var inputValues = Enumerable.Range(1, 100).ToArray();
 
-var projectName = @"HealthPartners.FizzBuzz\";
+var projectName = @"FizzBuzz\";
 var pathToDomainDllFilesFromSrcFolder = @"HealthPartners.FizzBuzz.Domain\bin\Debug\net6.0\HealthPartners.FizzBuzz.Domain.dll";
 var pathToProjectSrcFolder = Environment.CurrentDirectory.Substring(0, Environment.CurrentDirectory.IndexOf(projectName) + projectName.Length);
 
