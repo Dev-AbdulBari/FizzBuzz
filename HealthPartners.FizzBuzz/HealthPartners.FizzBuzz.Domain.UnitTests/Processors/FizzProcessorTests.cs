@@ -23,11 +23,11 @@ namespace HealthPartners.FizzBuzz.Domain.UnitTests.Processors
         }
 
         [Test]
-        public void ProcessMethod_WhenProvidedANumberNotDivisbleByThree_ReturnsFizz()
+        public void ProcessMethod_WhenProvidedANumberNotDivisbleByThree_ReturnsNull()
         {
-            var numberDivisbleByThree = 4;
+            var numberNotDivisbleByThree = 4;
 
-            var result = _fizzProcessor.Process(numberDivisbleByThree);
+            var result = _fizzProcessor.Process(numberNotDivisbleByThree);
             Assert.IsNull(result);
         }
     }
