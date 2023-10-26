@@ -9,11 +9,11 @@ namespace HealthPartners.FizzBuzz.Domain.Processors
 {
     public class BuzzProcessor : IProcessor
     {
-        public byte OrderConfig => throw new NotImplementedException();
+        public byte OrderConfig => 2;
 
         public string? Process(int number)
         {
-            throw new NotImplementedException();
+            return number % 5 == 0 ? "Buzz" : null;
         }
     }
 }
