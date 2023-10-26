@@ -5,28 +5,29 @@ namespace HealthPartners.FizzBuzz.Domain.UnitTests.Processors
 {
     internal class FizzProcessorTests
     {
+        private FizzProcessor _fizzProcessor;
+
         [SetUp]
         public void Setup()
         {
+            _fizzProcessor = new FizzProcessor();
         }
 
         [Test]
         public void ProcessMethod_WhenProvidedANumberDivisbleByThree_ReturnsFizz()
-        {
-            var fizzProcessor = new FizzProcessor();
+        { 
             var numberDivisbleByThree = 3;
 
-            var result = fizzProcessor.Process(numberDivisbleByThree);
+            var result = _fizzProcessor.Process(numberDivisbleByThree);
             Assert.AreEqual("Fizz", result);
         }
 
         [Test]
         public void ProcessMethod_WhenProvidedANumberNotDivisbleByThree_ReturnsFizz()
         {
-            var fizzProcessor = new FizzProcessor();
             var numberDivisbleByThree = 4;
 
-            var result = fizzProcessor.Process(numberDivisbleByThree);
+            var result = _fizzProcessor.Process(numberDivisbleByThree);
             Assert.IsNull(result);
         }
     }
