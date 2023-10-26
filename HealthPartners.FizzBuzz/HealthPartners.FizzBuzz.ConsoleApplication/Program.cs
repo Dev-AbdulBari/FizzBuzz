@@ -2,7 +2,12 @@
 
 var inputValues = Enumerable.Range(1, 100).ToArray();
 
-var processedValues = new RuntimeMasterProcessorService().ProcessAll(inputValues);
+var projectName = @"HealthPartners.FizzBuzz\";
+var pathToDomainDllFilesFromSrcFolder = @"HealthPartners.FizzBuzz.Domain\bin\Debug\net6.0\HealthPartners.FizzBuzz.Domain.dll";
+var pathToProjectSrcFolder = Environment.CurrentDirectory.Substring(0, Environment.CurrentDirectory.IndexOf(projectName) + projectName.Length);
+
+
+var processedValues = new RuntimeMasterProcessorService(pathToProjectSrcFolder + pathToDomainDllFilesFromSrcFolder).ProcessAll(inputValues);
 
 foreach (var processedValue in processedValues)
 {

@@ -5,14 +5,16 @@ namespace HealthPartners.FizzBuzz.ConsoleApplication.Services
 {
     public class RuntimeMasterProcessorService : IMasterProcessorService
     {
+        private string _pathToProcessorDll;
+        public RuntimeMasterProcessorService(string pathToProcessorDll)
+        {
+            _pathToProcessorDll = pathToProcessorDll;
+        }
+
         public IEnumerable<string> ProcessAll(int[] numbers)
         {
-            var projectName = @"HealthPartners.FizzBuzz\";
-            var pathToDomainDllFilesFromSrcFolder = @"HealthPartners.FizzBuzz.Domain\bin\Debug\net6.0\HealthPartners.FizzBuzz.Domain.dll";
-            var pathToProjectSrcFolder = Environment.CurrentDirectory.Substring(0, Environment.CurrentDirectory.IndexOf(projectName) + projectName.Length);
-
             var processedValues = new List<string>();
-            IEnumerable<object> availableProcessors = DetectProcessors(pathToDomainDllFilesFromSrcFolder, pathToProjectSrcFolder);
+            IEnumerable<object> availableProcessors = DetectProcessors();
 
             foreach (var number in numbers)
             {
@@ -44,10 +46,10 @@ namespace HealthPartners.FizzBuzz.ConsoleApplication.Services
             return processedValues;
         }
 
-        private static IEnumerable<object> DetectProcessors(string pathToDomainDllFilesFromSrcFolder, string pathToProjectSrcFolder)
+        private IEnumerable<object> DetectProcessors()
         {
             return Assembly
-                        .Load(File.ReadAllBytes(pathToProjectSrcFolder + pathToDomainDllFilesFromSrcFolder))
+                        .Load(File.ReadAllBytes(_pathToProcessorDll))
                         .GetTypes()
                         .Where(type => type.Name.Contains("Processor") && type.IsClass)
                         .Select(type => Activator.CreateInstance(type, null)!)
