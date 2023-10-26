@@ -25,5 +25,15 @@ namespace HealthPartners.FizzBuzz.Domain.UnitTests.Processors
             var result = buzzProcessor.Process(numberDivisbleByFive);
             Assert.AreEqual("Buzz", result);
         }
+
+        [Test]
+        public void ProcessMethod_WhenProvidedANumberNotDivisbleByFive_ReturnsNull()
+        {
+            var buzzProcessor = new BuzzProcessor();
+            var numberNotDivisbleByFive = 6;
+
+            var result = buzzProcessor.Process(numberNotDivisbleByFive);
+            Assert.AreEqual(null, result);
+        }
     }
 }
