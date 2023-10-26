@@ -10,29 +10,29 @@ namespace HealthPartners.FizzBuzz.Domain.UnitTests.Processors
 {
     internal class BuzzProcessorTests
     {
+        private BuzzProcessor _buzzProcessor;
+
         [SetUp]
         public void Setup()
         {
-
+            _buzzProcessor = new BuzzProcessor();
         }
 
         [Test]
         public void ProcessMethod_WhenProvidedANumberDivisbleByFive_ReturnsBuzz()
         {
-            var buzzProcessor = new BuzzProcessor();
             var numberDivisbleByFive = 5;
 
-            var result = buzzProcessor.Process(numberDivisbleByFive);
+            var result = _buzzProcessor.Process(numberDivisbleByFive);
             Assert.AreEqual("Buzz", result);
         }
 
         [Test]
         public void ProcessMethod_WhenProvidedANumberNotDivisbleByFive_ReturnsNull()
         {
-            var buzzProcessor = new BuzzProcessor();
             var numberNotDivisbleByFive = 6;
 
-            var result = buzzProcessor.Process(numberNotDivisbleByFive);
+            var result = _buzzProcessor.Process(numberNotDivisbleByFive);
             Assert.AreEqual(null, result);
         }
     }
