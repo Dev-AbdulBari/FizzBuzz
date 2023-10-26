@@ -13,7 +13,12 @@ namespace HealthPartners.FizzBuzz.Domain.Processors
 
         public string? Process(int number)
         {
-            return number % 5 == 0 ? "Buzz" : null;
+            return IsNumberDivisbleByFive(number) ? "Buzz" : null;
+        }
+
+        private static bool IsNumberDivisbleByFive(int number)
+        {
+            return number % 5 == 0;
         }
     }
 }
