@@ -8,7 +8,12 @@ namespace HealthPartners.FizzBuzz.Domain.Processors
 
         public string? Process(int number)
         {
-            return number % 3 == 0 ? "Fizz" : null;
+            return IsDivisibleByThree(number) ? "Fizz" : null;
+        }
+
+        private static bool IsDivisibleByThree(int number)
+        {
+            return number % 3 == 0;
         }
     } 
 }
